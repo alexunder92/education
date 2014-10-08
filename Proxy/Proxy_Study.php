@@ -100,7 +100,7 @@ class Proxy_Study extends Proxy_Base
     {
         $study_vo->details = $this->proxy_details->get_by_study_id( $study_vo->id );
         $study_vo->institution = $this->proxy_institution->get_by_id( $study_vo->institution_id );
-        $study_vo->specialty = $this->proxy_specialty->get_by_id( $study_vo->specialty_code );
+        $study_vo->specialty = $this->proxy_specialty->get_by_code( $study_vo->specialty_code );
 
         return $study_vo;
     }
@@ -115,6 +115,24 @@ class Proxy_Study extends Proxy_Base
         }
 
         return $studies;
+    }
+
+    /**
+     * @param $study VO_Study
+     * @return VO_Study
+     */
+    function create( $study )
+    {
+        global $wpdb;
+
+        $result = $wpdb->insert( $this->table_name, array( 'specialty_code' => $study->specialty_code, 'institution_id' => $study->institution_id),
+            array( '%s', '%d' ) );
+
+        if( !$result )
+            return NULL;
+        $study->id = $wpdb->insert_id;
+
+        return $study;
     }
 
 }

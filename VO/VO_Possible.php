@@ -11,11 +11,12 @@ class VO_Possible
 {
 
 	public $id = -1;
-	/** array of VO_Condition()*/
+    public $details_id = null;
+    /** array of VO_Condition()*/
 	public $conditions = array();
 
-	public function __construct( $row )
+	public function __construct( $row=null )
 	{
-		$this->id = $row->id;
+		if(!is_null($row)) $this->id = $row->id;
 	}
 }

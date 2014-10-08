@@ -34,45 +34,100 @@ class Mediator_Search {
                 $data['all_cities'] = $all_cities;
 
 
-
+                $form_fields =array();
                 $test = array();
 
-                //var_dump($test['city']);
-                if(isset($_POST['city'])) {
-                    $test['city'] = array(
-                        'name' => 'city',
-                        'criteries' => array(
-                            /*'city' => $_POST['city']*/ /*TODO FIX IT*/
-                            'id' => ceil($_POST['city'])
-                        ),
-                    );
+                /* City */
+                $flag_city = false;
+                $city_arr = array(
+                    'name' => 'city'
+                );
+                $city_id = $this->checkPostVariable('city');
+                if($city_id)
+                {
+                    $flag_city = true;
+                    $city_arr['criteria']['id'] = $city_id;
+                    $form_fields['city_id'] = $city_id;
                 }
 
-                if(isset($_POST['specialty'])) {
-                    $test['specialty'] = array(
-                        'name' => 'specialty',
-                        'criteries' => array(
-                            'id' => ceil($_POST['specialty'])
-                            /*'code' => '',
-                            speciality' => '',*/
-                            /*'level' => 'В(Б)'*/
-                        )
-                    );
+                if($flag_city) $test['city'] = $city_arr;
+                /* end City */
+
+                /* Specialty*/
+                $flag_specialty = false;
+                $specialty_arr = array(
+                    'name' => 'specialty'
+                );
+                $specialty_id = $this->checkPostVariable('specialty');
+                if($specialty_id)
+                {
+                    $flag_specialty = true;
+                    $specialty_arr['criteria']['id'] = $specialty_id;
+                    $form_fields['specialty_id'] = $specialty_id;
                 }
 
+                $specialty_code = $this->checkPostVariable('code', 'str');
+                if($specialty_code)
+                {
+                    $flag_specialty = true;
+                    $specialty_arr['criteria']['code'] = $specialty_code;
+                    $form_fields['specialty_code'] = $specialty_code;
+                }
+
+                if($flag_specialty) $test['specialty'] = $specialty_arr;
+                /* end Specialty*/
+
+                /* Conditions */
+                $flag_conditions = false;
+                $conditions_arr = array(
+                    'name' => 'exams'
+                );
+                $exams = $this->checkPostVariable('exams', 'array');
+
+                if(!empty($exams))
+                {
+                    $flag_conditions = true;
+                    $conditions_arr['criteria'] = $exams;
+                    $form_fields['exams'] = $exams;
+                }
+
+                if($flag_conditions) $test['exams'] = $conditions_arr;
+                /* end Conditions */
 
 
                 $search_studies = $proxy_search->search_by_params($test);
 
-                $proxy_study = new Proxy_Study();
-
-                foreach($search_studies as $study)
-                {
-                    $result[]=$proxy_study->get_by_id($study->id);
-                }
-
-                $facade->get_template("search-result.php", array('search_form'=> HtmlWrapper_SearchForm::form($data), 'search_result' => HtmlWrapper_StudiesInSearch::wrapStudies($result)));
+                if(!empty($search_studies)) $result = HtmlWrapper_StudiesInSearch::wrapStudies($search_studies);
+                else $result = "К сожалению, ничего не нашлось;(";
+                $data['form_fields']= $form_fields;
+                $facade->get_template("search-result.php", array('search_form'=> HtmlWrapper_SearchForm::form($data), 'search_result' => $result));
                 break;
         }
+    }
+
+    /**
+     * @param $var
+     * @param string $type
+     * @return bool
+     */
+    private function checkPostVariable($var, $type='int')
+    {
+        if(isset($_POST[$var])) {
+            if (!empty($_POST[$var])) {
+                switch($type){
+                    case('int'):
+                        return ceil($_POST[$var]);
+                        break;
+                    case('str'):
+                        return $_POST[$var];
+                    case('array'):
+                        if(is_array($_POST[$var])) return $_POST[$var];
+                        else return false;
+                    default:
+                        return $_POST[$var];
+                        break;
+                }
+            }
+        } else return false;
     }
 } 

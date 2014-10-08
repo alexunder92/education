@@ -76,6 +76,7 @@ class Proxy_Institution extends Proxy_Base
 		if( !$result )
 			return NULL;
 
+        $institution->id = $wpdb->insert_id;
 		return $institution;
 	}
 
@@ -99,5 +100,12 @@ class Proxy_Institution extends Proxy_Base
 
 		return $this->arr_to_vos( $rows );
     }
+
+
+    /*function get_by_fields($fields)
+    {
+
+        return
+    }*/
 
 }

@@ -45,9 +45,10 @@ class HtmlWrapper_Specialty extends HtmlWrapper {
         return $html;
     }
 
-    static function wrapSpecialitiesForOptions($specialities = array(), $selected_id = NULL)
+    static function wrapSpecialitiesForOptions($specialities = array(), $selected_id = NULL, $add_empty_value = false)
     {
         $html = "";
+        if($add_empty_value)  $html .= '<option value=""></option>';
         foreach($specialities as $speciality)
         {
             $selected ="";

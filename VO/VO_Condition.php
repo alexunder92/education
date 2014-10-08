@@ -16,9 +16,11 @@ class VO_Condition /* Условия поступления */
 
 	public function __construct( $row = null )
 	{
-		$this->id = $row->id;
-		$this->possible_id = $row->possible_id;
-		$this->key = $row->key;
-		$this->value = $row->value;
+        if(!is_null($row)) {
+            $this->id = $row->id;
+            $this->possible_id = $row->possible_id;
+            $this->key = $row->key;
+            $this->value = $row->value;
+        }
 	}
 }

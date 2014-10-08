@@ -62,6 +62,7 @@ class Proxy_Specialty extends Proxy_Base
 
 		if( !$result )
 			return NULL;
+        $specialty->id = $wpdb->insert_id;
 
 		return $specialty;
 	}
@@ -75,7 +76,7 @@ class Proxy_Specialty extends Proxy_Base
 	function get_by_specialty_code( $specialty_code )
 	{
         //TODO Change "id" to "specialty_code"
-        $row = parent::get_by_key( "id", $specialty_code );
+        $row = parent::get_by_key( "code", $specialty_code );
 		//Description: Существует только одна специальность с определенным "кодом"
 		// поэтому в массиве всегда будет только одни элемент.
 		//$arr = $this->arr_to_vos( $rows );

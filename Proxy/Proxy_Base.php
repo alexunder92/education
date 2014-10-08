@@ -77,6 +77,29 @@ class Proxy_Base
 		return $result;
 	}
 
+    /**
+     * Search VO by some fields
+     * @param $fields array of fileds
+     * @return mixed|null
+     */
+    function get_by_fields( $fields )
+    {
+        global $wpdb;
+        $where_arr=array();
+        if(is_array($fields))
+        {
+            foreach($fields as $key=>$value)
+            {
+                $where_arr[]= "`{$key}`='{$value}'";
+            }
+        } else return null;
+        $where=implode(" AND ", $where_arr);
+
+        $result = $wpdb->get_results( "SELECT * FROM `".$this->table_name."` WHERE {$where}" );
+        if(empty($result)) return null;
+        return $result;
+    }
+
 	//function back_up(){}
 
 	function init()

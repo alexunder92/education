@@ -27,7 +27,7 @@ class VO_Study
 		if( $row )
 		{
 			$this->id = $row->id;
-			$this->specialty_code = $row->specialty_id;
+			$this->specialty_code = $row->specialty_code;
 			$this->institution_id = $row->institution_id;
 
             //TODO Нужно-ли это здесь? Мб, лучше заполнить это в Медиаторе...

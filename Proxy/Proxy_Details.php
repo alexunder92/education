@@ -69,16 +69,17 @@ class Proxy_Details extends Proxy_Base
 		return $result;
 	}
 
-	function create( $specialty )
+	function create( $details )
 	{
 		global $wpdb;
-
-		$result = $wpdb->insert( $this->table_name, array( 'code' => $specialty->code, 'speciality' => $specialty->specialty, 'description' => $specialty->description, 'level' => $specialty->level ), array( '%s', '%s', '%s', '%s' ) );
+		$result = $wpdb->insert( $this->table_name,
+            array( 'periodicity' => $details->periodicity, 'start' => $details->start,
+            'duration' => $details->duration, 'form_of_education' => $details->form_of_education, 'study_id' => $details->study_id ), array( '%s', '%s', '%s', '%s', '%d' ) );
 
 		if( !$result )
 			return NULL;
-
-		return $specialty;
+        $details->id = $wpdb->insert_id;
+		return $details;
 	}
 
 	function get_by_start( $start )

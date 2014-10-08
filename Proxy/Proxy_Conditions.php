@@ -64,7 +64,7 @@ class Proxy_Conditions extends Proxy_Base
 
 		if( !$result )
 			return NULL;
-
+        $condition->id = $wpdb->insert_id;
 		return $condition;
 	}
 

@@ -72,7 +72,7 @@ class Proxy_Possible extends Proxy_Base
 
 		if( !$result )
 			return NULL;
-
+        $possible->id = $wpdb->insert_id;
 		return $possible;
 	}
 

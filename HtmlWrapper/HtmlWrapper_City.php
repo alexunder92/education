@@ -35,9 +35,10 @@ class HtmlWrapper_City extends HtmlWrapper{
         return $html;
     }
 
-    static function wrapCitiesForOptions($cities = array(), $selected_city_id=NULL)
+    static function wrapCitiesForOptions($cities = array(), $selected_city_id = NULL, $add_empty_value = false)
     {
         $html = "";
+        if($add_empty_value)  $html .= '<option value=""></option>';
         foreach($cities as $city)
         {
             $selected ="";

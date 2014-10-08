@@ -14,49 +14,6 @@ Author URI: http://vk.com/alex_zz
 
 require_once('Facade.php');
 
-/*function template_redirect_to_random() {
-    if( get_query_var('education') == 'education' ) {
-
-        $facade = new  Facade();
-        $facade->add_title('Test title');
-        $facade->add_header('SearchResult',"key","descr");
-
-        $proxy_city=new Proxy_City();
-        $all_cities = $proxy_city->get_all();
-
-        $proxy_search = new Proxy_Search();
-        $result = $proxy_search->get_all();
-
-        $proxy_specialty = new Proxy_Specialty();
-        $all_specialties = $proxy_specialty->get_all();
-
-        $data = array();
-        $data['all_specialties'] = $all_specialties;
-        $data['all_cities'] = $all_cities;
-
-        $test = array(
-            'city' => array(
-                'name' => 'city',
-                'criteries' => array(
-                    'city' => 'Томск'
-                ),
-            ),
-            'specialty' => array(
-                'name' => 'specialty',
-                'criteries' => array(
-                    'code' => '',
-                    'speciality' => '',
-                    'level' => 'В(Б)'
-                )
-            )
-        );
-
-        $proxy_search->search_by_params($test);
-
-        $facade->get_template("search-result.php", array('search_form'=> HtmlWrapper_SearchForm::form($data), 'search_result' => HtmlWrapper_StudiesInSearch::wrapStudies($result)));
-    }
-}*/
-
 function __autoload($class_name) {
     if(substr_count($class_name, "HtmlWrapper")||substr_count($class_name, "Mediator")||substr_count($class_name, "Proxy")||substr_count($class_name, "SQL")||substr_count($class_name, "VO")) {
 
@@ -125,6 +82,7 @@ class Education {
             case "add_exams":    $this->add_exams(); break;
             case "condition":    $this->condition(); break;
             case "backup":       $this->backup(); break;
+            case "parse":        $this->parse(); break;
         }
 
         //$this->$route();
@@ -203,6 +161,12 @@ class Education {
     {
         $backup = new Mediator_Backup();
         echo $backup->html;
+    }
+
+    public function parse()
+    {
+        $parser = new Mediator_Parser();
+        echo $parser->html;
     }
 
     public function search()
