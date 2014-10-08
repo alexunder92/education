@@ -19,7 +19,7 @@ class HtmlWrapper_SearchForm {
         if(!isset($form_fields['city_id'])) $form_fields['city_id'] = NULL;
         if(!isset($form_fields['specialty_id'])) $form_fields['specialty_id'] = NULL;
         if(!isset($form_fields['specialty_code'])) $form_fields['specialty_code'] = "";
-
+        if(!isset($form_fields['exams'])) $form_fields['exams'] = array();
 
         if(isset($all_cities)) $options_cities = HtmlWrapper_City::wrapCitiesForOptions($all_cities, $form_fields['city_id'], true);
         else $options_cities = "";
@@ -38,9 +38,18 @@ class HtmlWrapper_SearchForm {
                 </select></div>
                 <div>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Русский язык', $form_fields['exams']) . "value='Русский язык'/> Русский язык</label>
-                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Математика', $form_fields['exams']) . "value='Математика'/> Математика</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Биология', $form_fields['exams']) . "value='Биология'/> Биология</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('География', $form_fields['exams']) . "value='География'/> География</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Иностранный язык', $form_fields['exams']) . "value='Иностранный язык'/> Иностранный язык</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Информатика и информационно-коммуникационные технологии (ИКТ)', $form_fields['exams']) . "value='Информатика и информационно-коммуникационные технологии (ИКТ)'/> Информатика</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('История', $form_fields['exams']) . "value='История'/> История</label>
-                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Обществознание', $form_fields['exams']) . "value='Обществознание'/> Обществознание</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Литература', $form_fields['exams']) . "value='Литература'/> Литература</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Математика', $form_fields['exams']) . "value='Математика'/> Математика</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Рисунок, Живопись, Композиция', $form_fields['exams']) . "value='Рисунок, Живопись, Композиция'/> Рисунок, Живопись, Композиция</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Спортивная Дисциплина', $form_fields['exams']) . "value='Спортивная Дисциплина'/> Спортивная Дисциплина</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Творческий Конкурс', $form_fields['exams']) . "value='Творческий Конкурс'/> Творческий Конкурс</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Физика', $form_fields['exams']) . "value='Физика'/> Физика</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Химия', $form_fields['exams']) . "value='Химия'/> Химия</label>
                 </div>
                 <button type='submit'>Search</button>
             </form>

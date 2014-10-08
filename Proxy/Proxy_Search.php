@@ -129,12 +129,20 @@ class Proxy_Search
     private function get_by_exams( $exams = null )
     {
         $conditions = array();
-        echo 'tyt';
-        var_dump($exams);
-        if(is_array($exams)) extract($exams);
-        foreach($exams as $key => $value) {
-            $this->add_join_conditions($key);
-            $conditions[] = "(condition{$key}.key='ege' AND condition{$key}.value= '{$value}')";
+        var_dump(count($exams));
+        //if(is_array($exams)) extract($exams);
+        if(count($exams)<=3) {
+            foreach ($exams as $key => $value) {
+                $this->add_join_conditions($key);
+                $conditions[] = "(conditions{$key}.key='ege' AND conditions{$key}.value= '{$value}')";
+            }
+        } else {
+            $where = array();
+            $this->add_join_conditions();
+            foreach ($exams as $key => $value) {
+                $where[] = "(conditions.key='ege' AND conditions.value='{$value}')";
+            }
+            $conditions[] = implode(" OR ", $where);
         }
         return $conditions;
     }
@@ -184,8 +192,8 @@ class Proxy_Search
     private function add_join_conditions($id="")
     {
         $this->add_join_possible();
-        if(!in_array('condition'.$id, $this->join_occurence)) {
-            $this->sql .= "INNER JOIN  `" . $this->table_prefix . "conditions` condition{$id} ON possible.id = condition{$id}.possible_id ";
+        if(!in_array('conditions'.$id, $this->join_occurence)) {
+            $this->sql .= "INNER JOIN  `" . $this->table_prefix . "conditions` conditions{$id} ON possible.id = conditions{$id}.possible_id ";
             $this->join_occurence[] = 'conditions'.$id;
         }
     }
