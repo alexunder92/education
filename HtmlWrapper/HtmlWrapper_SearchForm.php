@@ -45,6 +45,7 @@ class HtmlWrapper_SearchForm {
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('История', $form_fields['exams']) . "value='История'/> История</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Литература', $form_fields['exams']) . "value='Литература'/> Литература</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Математика', $form_fields['exams']) . "value='Математика'/> Математика</label>
+                    <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Обществознание', $form_fields['exams']) . "value='Обществознание'/> Обществознание</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Рисунок, Живопись, Композиция', $form_fields['exams']) . "value='Рисунок, Живопись, Композиция'/> Рисунок, Живопись, Композиция</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Спортивная Дисциплина', $form_fields['exams']) . "value='Спортивная Дисциплина'/> Спортивная Дисциплина</label>
                     <label><input name='exams[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('Творческий Конкурс', $form_fields['exams']) . "value='Творческий Конкурс'/> Творческий Конкурс</label>

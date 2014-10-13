@@ -129,16 +129,35 @@ class Proxy_Search
     private function get_by_exams( $exams = null )
     {
         $conditions = array();
-        var_dump(count($exams));
+        //var_dump(count($exams));
         //if(is_array($exams)) extract($exams);
-        if(count($exams)<=3) {
-            foreach ($exams as $key => $value) {
+        $this->add_join_conditions();
+        if(count($exams)>2) {
+            /*foreach ($exams as $key => $value) {
                 $this->add_join_conditions($key);
                 $conditions[] = "(conditions{$key}.key='ege' AND conditions{$key}.value= '{$value}')";
+            }*/
+            foreach($exams as $key => $value)
+            {
+                $exams[$key] = "'".$value."'";
             }
+            $exams_str = implode(",",$exams);
+
+            $this->sql .= "
+INNER JOIN (
+SELECT id, COUNT( * ) AS count
+FROM  `" . $this->table_prefix . "conditions`
+WHERE  `value`
+IN (
+{$exams_str}
+)
+GROUP BY  `possible_id`
+) AS count ON conditions.id = count.id
+            ";
+            $conditions[] = "possible.count_conditions = count.count ";
         } else {
             $where = array();
-            $this->add_join_conditions();
+
             foreach ($exams as $key => $value) {
                 $where[] = "(conditions.key='ege' AND conditions.value='{$value}')";
             }
