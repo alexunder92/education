@@ -86,6 +86,34 @@ class Proxy_Search
         return $conditions;
     }
 
+    private function get_by_form_of_education( $form=null )
+    {
+        $this->add_join_specialty();
+        if(is_array($form)) extract($form);
+        else return;
+        $conditions = array();
+        var_dump($form);
+        foreach($form as $code)
+        {
+            switch($code)
+            {
+                case "specialty":
+                    $conditions[] = "specialty.code LIKE '__.05.__'";
+                break;
+                case "master":
+                    $conditions[] = "specialty.code LIKE '__.04.__'";
+                break;
+                case "bachelor":
+                    $conditions[] = "specialty.code LIKE '__.03.__'";
+                break;
+            }
+        }
+        $query = implode(" OR ", $conditions);
+        $conditions = array();
+        $conditions[] = "(".$query.")";
+        return $conditions;
+    }
+
     private function get_by_institution( $institution=null )
     {
         $this->add_join_institution();
@@ -115,16 +143,16 @@ class Proxy_Search
         return $conditions;
     }
 
-    private function get_by_conditions( $condition=null )
+/*    private function get_by_conditions( $condition=null )
     {
         $this->add_join_conditions();
         if(is_array($condition)) extract($condition);
         else return;
         $conditions = array();
         if(isset($key)&&isset($value)) $conditions[] = "conditions.key = '" . $key . "' AND conditions.value = '" . $value . "'";
-        /*todo add other criteries*/
+
         return $conditions;
-    }
+    }*/
 
     private function get_by_exams( $exams = null )
     {

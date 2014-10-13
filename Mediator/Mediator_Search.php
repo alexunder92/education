@@ -53,6 +53,23 @@ class Mediator_Search {
                 if($flag_city) $test['city'] = $city_arr;
                 /* end City */
 
+                /* Form of education */
+                $flag_form_of_education = false;
+                $form_of_education_arr = array(
+                    'name' => 'form_of_education'
+                );
+                $form_of_education = $this->checkPostVariable('form_of_education', 'array');
+
+                if(!empty($form_of_education))
+                {
+                    $flag_form_of_education = true;
+                    $form_of_education_arr['criteria'] = $form_of_education;
+                    $form_fields['form_of_education'] = $form_of_education;
+                }
+
+                if($flag_form_of_education) $test['form_of_education'] = $form_of_education_arr;
+                /* end Form of education */
+
                 /* Specialty*/
                 $flag_specialty = false;
                 $specialty_arr = array(

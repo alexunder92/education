@@ -79,7 +79,7 @@ class addStudies {
         $details_vo = $this->proxy_details->create($details_vo);
 
         //add conditions
-        $possible_vo = $this->addPossible($details_vo->id);
+        $possible_vo = $this->addPossible($details_vo->id, count($conditions));
         foreach($conditions as $condition)
         {
 
@@ -89,10 +89,11 @@ class addStudies {
         return true;
     }
 
-    function addPossible($details_id)
+    function addPossible($details_id, $count_conditions)
     {
         $possible_vo = new VO_Possible();
         $possible_vo->details_id = $details_id;
+        $possible_vo->count_conditions = $count_conditions;
         return $this->proxy_possible->create($possible_vo);
     }
 

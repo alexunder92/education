@@ -68,7 +68,7 @@ class Proxy_Possible extends Proxy_Base
 	{
 		global $wpdb;
 
-		$result = $wpdb->insert( $this->table_name, array( 'details_id' => $possible->details_id ), array( '%d' ) );
+		$result = $wpdb->insert( $this->table_name, array( 'details_id' => $possible->details_id, 'count_conditions' => $possible->count_conditions ), array( '%d', '%d' ) );
 
 		if( !$result )
 			return NULL;

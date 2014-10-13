@@ -23,7 +23,7 @@ class VO_Specialty
             $this->speciality = $row->speciality;
             $this->code = $row->code;
             $this->level = $row->level;
-            $this->level = $row->description;
+            $this->description = $row->description;
         }
     }
 }

@@ -20,6 +20,7 @@ class HtmlWrapper_SearchForm {
         if(!isset($form_fields['specialty_id'])) $form_fields['specialty_id'] = NULL;
         if(!isset($form_fields['specialty_code'])) $form_fields['specialty_code'] = "";
         if(!isset($form_fields['exams'])) $form_fields['exams'] = array();
+        if(!isset($form_fields['form_of_education'])) $form_fields['form_of_education'] = array();
 
         if(isset($all_cities)) $options_cities = HtmlWrapper_City::wrapCitiesForOptions($all_cities, $form_fields['city_id'], true);
         else $options_cities = "";
@@ -32,6 +33,11 @@ class HtmlWrapper_SearchForm {
                 <div>Город: <select name='city'>
                  ". $options_cities ."
                 </select></div>
+                <div>
+                    <label><input name='form_of_education[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('bachelor', $form_fields['form_of_education']) . "value='bachelor'/> Бакалавриат</label>
+                    <label><input name='form_of_education[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('master', $form_fields['form_of_education']) . "value='master'/> Магистратура</label>
+                    <label><input name='form_of_education[]' type='checkbox' " . HtmlWrapper_SearchForm::checkExams('specialty', $form_fields['form_of_education']) . "value='specialty'/> Специалитет</label>
+                </div>
                 <div>Код специальности: <input type='text' name='code' value='" . $form_fields['specialty_code'] . "' /></div>
                 <div>Специальность: <select name='specialty'>
                  ". $options_specialties ."

@@ -58,7 +58,7 @@ class Proxy_Specialty extends Proxy_Base
 	{
 		global $wpdb;
 
-		$result = $wpdb->insert( $this->table_name, array( 'code' => $specialty->code, 'speciality' => $specialty->specialty, 'description' => $specialty->description, 'level' => $specialty->level ), array( '%s', '%s', '%s', '%s' ) );
+		$result = $wpdb->insert( $this->table_name, array( 'code' => $specialty->code, 'speciality' => $specialty->speciality, 'description' => $specialty->description, 'level' => $specialty->level ), array( '%s', '%s', '%s', '%s' ) );
 
 		if( !$result )
 			return NULL;
