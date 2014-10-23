@@ -83,6 +83,7 @@ class Education {
             case "condition":    $this->condition(); break;
             case "backup":       $this->backup(); break;
             case "parse":        $this->parse(); break;
+            case "parseuniversity":$this->parseuniversity(); break;
         }
 
         //$this->$route();
@@ -166,6 +167,12 @@ class Education {
     public function parse()
     {
         $parser = new Mediator_Parser();
+        echo $parser->html;
+    }
+
+    public function parseuniversity()
+    {
+        $parser = new Mediator_ParseUniversity();
         echo $parser->html;
     }
 

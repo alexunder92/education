@@ -59,6 +59,8 @@ class Mediator_Backup {
             $templine .= $line;
             if (substr(trim($line), -1, 1) == ';')
             {
+                /*TODO FIX Change wp prefix*/
+                if($wpdb->prefix!="wp_") $templine = str_replace('wp_',$wpdb->prefix, $templine);
                 if(!($wpdb->query($templine))) return false;
                 $templine = '';
             }

@@ -68,10 +68,20 @@ class Proxy_Institution extends Proxy_Base
 	function create( /*VO_Institution*/ $institution )
 	{
 		global $wpdb;
-
+        //var_dump($institution);
 		$result = $wpdb->insert( $this->table_name,
-			array( 'name' => $institution->name, 'abbreviation' => $institution->abbreviation,
-				'city_id' => $institution->city_id, 'type' => $institution->type, 'adress' => $institution->adress, 'phone' => $institution->phone, 'site' => $institution->site, 'email' => $institution->email, 'description' => $institution->description, 'parent_id' => $institution->parent_id ), array( '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%d' ) );
+			array(
+                'name' => $institution->name,
+                'abbreviation' => $institution->abbreviation,
+				'city_id' => $institution->city_id,
+                'type' => $institution->type,
+                'adress' => $institution->adress,
+                'phone' => $institution->phone,
+                'site' => $institution->site,
+                'email' => $institution->email,
+                'description' => $institution->description,
+                'parent_id' => $institution->parent_id ),
+            array( '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%d' ) );
 
 		if( !$result )
 			return NULL;

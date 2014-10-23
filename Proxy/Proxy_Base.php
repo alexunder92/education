@@ -97,7 +97,7 @@ class Proxy_Base
 
         $result = $wpdb->get_results( "SELECT * FROM `".$this->table_name."` WHERE {$where}" );
         if(empty($result)) return null;
-        return $result;
+        return $result[0];
     }
 
 	//function back_up(){}
